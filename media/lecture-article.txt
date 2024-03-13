@@ -1,0 +1,137 @@
+Citation :
+
+2010 Leadership in Flocking
+[Vicenç Quera, Francesc S. Beltran, Ruth Dolado ]
+
+Lien :
+
+http://diposit.ub.edu/dspace/bitstream/2445/34511/1/577311.pdf
+
+Mots clés :
+
+	- Flocking Behaviour
+	- Hierarchical Leadership
+	- Agent-Based Simulation
+	- Social Dynamics
+
+Structure :
+
+	1. Abstract
+		Étude de l'émergence de meneur comme résultat d'interactions inter-agents
+		Il est supposé que les meneurs seraient une conséquence d'interactions entre agents basées sur des règles dyadic.
+		Utilisation du comportement de nuée, exemple de comportement de groupe, dont les propriétés observés peuvent expliquer quelques unes
+		des dynamiques et organisations humaines
+		Generation de nué, on récolte les indices des agents pour interpreter le mouvement du groupe et interpréter s'il y a un leader actuel
+		Plusieurs tests, afin de tester le model, et voir comment la définition de l'agent et les conditions du monde
+		influent sur les fluctuations des indices.
+		Identification des agents, propriété monde, paramètre de modèle, qui rende stable la nuée et qui
+		rende possible l'analyse des propriétés d'environnements qui prédictent la probabilité d'emergence de meneur.
+	2. Introduction
+		- Sociologie, sciences po, management, psycologie
+		- le but est d'étudier l'émergence de leader comme conséquence d'interactions entre agents, qui
+		ont les mêmes propriétés (aucun est prédominant)
+		Seuls les interactions entre agents mènent à la nuée et au meneur
+		- Explication du comportement de nuée, Reynold cité
+		- Nuée est comportement de group auto-organisé, provoqué par règles simple entre agent
+			Parallèle avec certains comportements de groupes humains (basées sur observation et analyse, non sur anticipation et croyance)
+		- implementation de nuée, différent de Reynold, résulte de dyadic interactions rules. 
+			2 types indices, nuée globale et nuée menée
+			Tests du comportement du modèle, des propriétés agents et environnement + model param qui favorise floacking
+			Description de l'emergence de meneur et tentative de lien avec les prop d'environnement et la situation du meneur (position)
+			Description probabilité de l'agent de devenir meneur
+	3. Modelling Flock Emergence 
+		- mouvement de coordonnées, Utilisation de P-Flock 2.0 (C et Delphi) et dyadic rule
+		a. World and Agents
+			world : 2D discret, cases capacité 1 agent
+			agent : a des coordonnées de position et un vecteur direction
+			l'agent a un champ de perception centré par sa direction. 
+			ses mouvements sont contraints par son voisinages 
+			(Moor et Von Neumann à plusieurs diametre possibles)
+		b. Ideal Distances and Dissatisfaction
+			définission de la distance idéal entre les agents qui peut changer selon le contexte,
+			l'agent voudra se déplacer avec son voisinage
+			l'agent pourra quantifier son mécontentement dans une situation selon un voisinage donnée, 
+				il voudra faire le mouvement qui minimisera son mécontentement futur
+			Les agents qui n'ont pas de cases spécifique pour réduire leur mécontentement, bougeront aléatoirement après que ceux
+				qui avaient l'occasion de faire baisser leur mécontentement aient bougé
+		c. Flock Synthesis Rules
+			Distance idéale varie selon les interactions entre agents, interactions basées sur des règles, les régles de synthèse de nuée 
+			les règles : 
+				- se déplacement intialement de manière aléatoire
+				- quand un agent croise un autre et que leurs distances est inférieur ou égale à une certaine valeur, 
+					alors il détermine une distance idéale qui les rapproche de manière aléatoire
+				- 2 manières de déterminer le futur déplacement :
+					- douce : s'adapter au déplacement de l'autre, il se déplacera selon son voisinage pour minimiser son mécontentement 
+						et considéra le déplacement qui le rapprochera de la distance idéal avec l'autre, en considérant qu'il ne bougera pas
+						L'agent s'eloignera donc ou s'approchera, selon la distance réelle et la distance idéal determinée.
+						Si après mouvement on a un mécontentement supérieure à celui prévu, on parle de sous-adaptage. S'il est inférieur à celui prévu, sur-adaptage. Si égale, parfaitement adapté
+						2 cas : a. approcher et sousadapté, b. éloigner et suradapté
+							a. augmenter la distance idéal est pénalité
+							b. augmenter la distance idéal est récompense
+
+						En gros, si overadapted le mouvement est cool et on continue, sinon pas cool on continue pas
+					- brut : si trop de stagnation ou trop d'isolation
+			Des paramètres
+			les agents intéragissent avec d'autre si dans le champ de perception, l'autre agent n'interagit pas forcément si ne voit pas le premier agent
+			si l'agent considère plusieurs agents, alors il déterminera la distance idéale de manière indépendante pour chaque agent
+			Démo sur le site, on peut pause, play, slow down... On enregistre les positions, les directions, les distances idéales etles indices de nuée et de menage
+	4. Quantifying Floacking
+		- indice nué : analyse des positions dans le temps
+		- nué grande si headings en communs et distances assez proches, sinon petite
+		- on observe le tout et determine l'indice globale de nué selon les nuées observés
+	5. An Index of Hierarchical Flock Leadership 
+		- lorsqu'il y a nué, on observe souvent un leader. Leader qui donne sa direction aux autres 
+		(il ne voit pas les autres mais les autres le voit et le suit)
+		- matrice sociale : un graph où les agents sont des noeuds et avec arêtes orientés selon les autres agents perçues
+		- leader vu et suivi par certains qui eux sont suivi par certains qui eux ... Le leader n'a pas forcément le plus haut degré
+		Avoir un degré nul ne suffit pas pour être leader, il faut être suivi...
+		- rang de prestige : notre prestige augmente si on est suivi par d'autre plus ou moins prestige
+		- si boucle, utiliser des substitue de valeurs
+		- le poids est le dyadic indice de nuée, ainsi l'indice de menage correspond au degré de mouvement coordonné de la nué. Si nué compact avec même heading,
+		l'indice de menage sera haut. Quand désordonné, pas beaucoup de nué, alors pas beaucoup de menage.
+		- différence avec effective leadership (effective explique le mouvement, le Hierarchical est une observation extérieur)
+		Avoir un meneur n'explique pas le mouvement, c'est les règles des agents qui le définisse
+		a. An Example
+			- 8 agents positionnés, on voit leur direction et qui ils perçoivent
+			- analyse des indices de nué (matrice avec des 1 si même direction entre 2 agents)
+			- on constate le leader
+	6. Method
+		- Les tests. 2 series de simulations :
+			- identifier conditions environnements (taille), conditions agent (champ de vision) et 
+				paramètre des interactions qui font émerger le mouvement de nué.
+			- analyse des leaders et essaie de déterminer la probabilité selon position initiale de devenir leader
+		a. Flock Emergence
+			- diverses tailles de mondes, 20 agents, perception entre 3pi/2 et 60 et utilisation 
+			du voisinage de Moore de diametre 3. Dispersé équitablement dans l'espace et même direction,
+			Simulation fait 20000 itérations. On répéte 4 fois la simulation selon la taille
+			- Résultats : grand monde, pas de nué. trop petit monde, trop d'interactions, nué pas stable.
+			Une taille relativement petite (150x120) est vu comme optimal pour 20 agents.
+			- On change la perception, on garde le reste, on fait tourner tout pareil qu'avant, (60, 6π/4) and (80, 5π/4) sont les meilleurs perceptions.
+			En relançant les simulations avec ces perceptions et le reste des critères sauf qu'on affecte aléatoirement les positions et les directions, la nuée est stable
+			- Simulations pour obtenir les paramètres des interactions
+			- Avec les résultats obtenue, on effectue 100 simulations qui tourne 20000 étapes avec affectation aléatoire des positions et directions, 72% de chance d'obtenir la nuée.
+			- lorsque nué stable, pas de patron général de comportement de la nuée stable
+		b. Flock Leadership
+			- le leader sera celui avec l'indice le plus grand, même s'il y a plusieurs nuées. 
+			Un seul leader stable à la fois.
+			- deux ensembles de simulations, les stables (72%) et pas stables (28%)
+			On observe les affectations de meneur et lorsque la nué est stable, le leader l'est aussi. Sinon, le leader change beaucoup de fois
+		c. Centrality and Leadership
+			- hypothèse de la centralité qui cause le meneur
+			- centralité : à partir d'un agent, somme des vecteurs menants aux autres, si somme nulle, agent centré
+			- après tests avec 292 leaders observés, la position n'influe pas le leader
+	7. Discussion and Conclusions
+		- Le modèle crée une nuée comme celui de Reynold sans utiliser le même principe. Ici, adaptation aux agents rencontrés, pénalité et récompense, 
+		minimisation du mécontentement produisent le mouvement de nuée. Les règles des agents ne le prévoient pas, c'est une conséquence de celles ci.
+		- Lorsque le mouvement de nué est produit, on constate des leaders stables. Les règles des agents ne le prévoient pas non plus, c'est également un phénomène emergeant.
+		- Indices de nuée et de meneur avec utilisation de graphes sociaux.
+		- Beaucoup de variations de paramètres possibles, l'objectif était de trouver lesquels favorisaient l'émergence de nué. 3 conclusions :
+			- monde grand, quand nuée, la nuée est stable
+			- les nuées les plus compactes et stables sont apparus lorsque grande vision et petit objectif, 
+			- avec les paramètres optimaux trouvé, 72% de chance d'avoir une nuée
+		- lorsque nuée stable, le leader le sera aussi. la position de l'agent leader n'a pas d'incidence apparente dans le fait de devenir leader.
+		- Possibilité de suite en 3D, possibilité de suite dans l'analyse d'émergeance de leaders
+
+Commentaires :
+
+Intéressant comme phénomène !
